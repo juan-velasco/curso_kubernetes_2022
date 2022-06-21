@@ -6,6 +6,8 @@ spec:
   containers:
   - name: nginx
     image: nginx:alpine
+    command: ["nginx"]
+    args: ["-g", "daemon off;"]
     env:
     - name: MI_VARIABLE
       value: "valor1"
