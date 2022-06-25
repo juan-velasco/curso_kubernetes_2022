@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-kubernetes
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 80
+  selector:
+    app: wordpress-kubernetes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-kubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-kubernetes
+  template:
+    metadata:
+      labels:
+        app: wordpress-kubernetes
+    spec:
+      containers:
+      - name: wordpress-kubernetes
+        image: wordpress:latest
+        ports:
+        - containerPort: 80
